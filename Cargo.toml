@@ -1,0 +1,6 @@
+[package]
+authors = ["Alex Story <astory11@yahoo.com>"]
+name = "xml"
+version = "0.1.0"
+
+[dependencies]
