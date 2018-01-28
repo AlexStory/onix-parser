@@ -9,7 +9,7 @@ fn main() {
     let (filename, destination) = xml::collect_args(&args);
     let mut contents = xml::worker::get_file_contents(filename);
     contents = xml::worker::replace_tags(contents);
-    let final_file = xml::worker::write_file(contents, destination);
+    let _final_file = xml::worker::write_file(contents, destination);
 
 
     println!("Completed Successfully. file at {}", destination);

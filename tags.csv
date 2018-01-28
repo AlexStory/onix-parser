@@ -1,1 +1,6 @@
-b1,productCategory
+a001,RecordReference
+a002,NotificationType
+a194,RecordSourceType
+a197,RecordSourceName
+b221,ProductIDType
+b233,IDTypeName
