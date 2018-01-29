@@ -14,4 +14,4 @@ or
 
 `./xml file.xml output.xml`
 
-current csv of short tag-names to reference names incomplete. List is available [https://onixedit.com/en-us/products/onixedit/onix-tags](here)
+current CSV of short tag-names to reference names incomplete. List is availble [here](https://onixedit.com/en-us/products/onixedit/onix-tags)
