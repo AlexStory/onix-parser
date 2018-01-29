@@ -1,17 +1,20 @@
 extern crate xml;
 extern crate time;
 
-use std::env;
 use time::PreciseTime;
+use std::env;
 
 fn main() {
     let start = PreciseTime::now();
     let args: Vec<String> = env::args().collect();
+
     xml::validate_args(&args);
     let (filename, destination) = xml::collect_args(&args);
     let mut contents = xml::worker::get_file_contents(filename);
     contents = xml::worker::replace_tags(contents);
+
     xml::worker::write_file(contents, destination);
     let end = PreciseTime::now();
+
     println!("Completed Successfully. Ran in {}", start.to(end));
 }
