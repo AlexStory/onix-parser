@@ -42,7 +42,7 @@ fn replace_tag(z: &str, x: &str, y: &str) -> String {
 
 fn get_tags() -> Vec<Vec<String>> {
     let mut res = Vec::new();
-    let contents = get_file_contents(&String::from("tags.csv"));
+    let contents = get_file_contents(&String::from("include/tags.csv"));
     for row in contents.trim().split("\n") {
         let mut t_row = Vec::new();
         if row != "" {
