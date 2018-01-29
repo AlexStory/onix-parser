@@ -3,12 +3,17 @@ pub mod worker;
 /// Throws errors if either required argument is missing.
 pub fn validate_args(args: &Vec<String>) {
     if args.len() == 1 {
-        eprintln!("No filename or destination provided");
+        eprintln!("No filename provided");
         std::process::exit(1);
     }
     if args.len() == 2 {
-        eprintln!("No destination provided");
+        eprintln!("No tag csv provided");
         std::process::exit(2);
+    }
+
+    if args.len() == 3 {
+        eprintln!("No destination provided");
+        std::process::exit(4);
     }
 }
 

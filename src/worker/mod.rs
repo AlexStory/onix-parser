@@ -51,6 +51,7 @@ pub fn replace_tag(file: String, old_tag: &str, new_tag: &str) -> String {
     file.replace(&old, &new)
         .replace(&close_old, &close_new)
         .replace(&solo_old, &solo_new)
+        .replace("ONIXmessage", "ONIXMessage")
 }
 
 
