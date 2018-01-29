@@ -3,7 +3,7 @@ use std::io::prelude::*;
 
 pub fn replace_tags(mut file: String) -> String {
     for (old, new) in get_tags() {
-        file = replace_tag(&file, &old, &new);
+        file = replace_tag(file, &old, &new);
     }
     file
 }
@@ -28,14 +28,14 @@ pub fn write_file(contents: String, destination: &String) -> File {
     new_file
 }
 
-fn replace_tag(z: &str, x: &str, y: &str) -> String {
+fn replace_tag(mut z: String, x: &str, y: &str) -> String {
     let old = format!("<{}>", x);
     let close_old = format!("</{}>", x);
     let new = format!("<{}>", y);
     let close_new = format!("</{}>", y);
-    let t = z.replace(&old, &new);
-    let t = t.replace(&close_old, &close_new);
-    t
+    z = z.replace(&old, &new);
+    z = z.replace(&close_old, &close_new);
+    z
 }
 
 fn get_tags() -> Vec<(String, String)> {
