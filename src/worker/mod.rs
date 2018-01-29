@@ -3,8 +3,8 @@ use std::fs::File;
 use std::io::prelude::*;
 
 /// Replace each tag in file with appropriate replacement.
-pub fn replace_tags(mut file: String) -> String {
-    for (old, new) in get_tags() {
+pub fn replace_tags(mut file: String, xml_tags: String) -> String {
+    for (old, new) in get_tags(xml_tags) {
         file = replace_tag(file, &old, &new);
     }
     file
@@ -55,9 +55,9 @@ pub fn replace_tag(file: String, old_tag: &str, new_tag: &str) -> String {
 
 
 /// Returns a tuple of (shorthand, reference-name) for every row in the local csv file.
-fn get_tags() -> Vec<(String, String)> {
+fn get_tags(location: String) -> Vec<(String, String)> {
     let mut res = Vec::new();
-    let contents = get_file_contents("include/tags.csv".to_string());
+    let contents = get_file_contents(location);
     for row in contents.trim().lines() {
         let items: Vec<&str> = row.split(",").collect();
         res.push((String::from(items[0]), String::from(items[1])));

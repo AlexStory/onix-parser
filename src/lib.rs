@@ -19,8 +19,9 @@ pub fn validate_args(args: &Vec<String>) {
 /// target - The xml file to process
 ///
 /// destination - where to write the processed file to
-pub fn collect_args(args: &Vec<String>) -> (String, String) {
+pub fn collect_args(args: &Vec<String>) -> (String, String, String) {
     let first = &args[1];
     let second = &args[2];
-    (first.to_string(), second.to_string())
+    let third = &args[3];
+    (first.to_owned(), second.to_owned(), third.to_owned())
 }
