@@ -47,7 +47,7 @@ pub fn replace_tag(mut file: String, old_tag: &str, new_tag: &str) -> String {
 fn get_tags() -> Vec<(String, String)> {
     let mut res = Vec::new();
     let contents = get_file_contents("include/tags.csv".to_string());
-    for row in contents.trim().split("\n") {
+    for row in contents.trim().lines() {
         let items: Vec<&str> = row.split(",").collect();
         res.push((String::from(items[0]), String::from(items[1])));
     }
