@@ -14,8 +14,9 @@ pub fn get_file_contents(filename: String) -> String {
     let mut file = File::open(filename).expect("File not found");
     let mut contents = String::new();
 
-    file.read_to_string(&mut contents)
-        .expect("Failed to parse file");
+    file.read_to_string(&mut contents).expect(
+        "Failed to parse file",
+    );
 
     contents
 }
@@ -24,9 +25,9 @@ pub fn get_file_contents(filename: String) -> String {
 pub fn write_file(contents: String, destination: String) -> File {
     let mut new_file = File::create(destination).expect("Could not create file at destination");
 
-    new_file
-        .write_all(&contents.trim().as_bytes())
-        .expect("Could not write to file");
+    new_file.write_all(&contents.trim().as_bytes()).expect(
+        "Could not write to file",
+    );
 
     new_file
 }
@@ -37,8 +38,11 @@ pub fn replace_tag(mut file: String, old_tag: &str, new_tag: &str) -> String {
     let close_old = format!("</{}>", old_tag);
     let new = format!("<{}>", new_tag);
     let close_new = format!("</{}>", new_tag);
+    let solo_old = format!("<{} />", old_tag);
+    let solo_new = format!("<{} />", new_tag);
     file = file.replace(&old, &new);
     file = file.replace(&close_old, &close_new);
+    file = file.replace(&solo_old, &solo_new);
     file
 }
 
