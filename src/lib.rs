@@ -13,7 +13,7 @@ pub fn validate_args(args: &Vec<String>) {
 
     if args.len() == 3 {
         eprintln!("No destination provided");
-        std::process::exit(4);
+        std::process::exit(4)
     }
 }
 

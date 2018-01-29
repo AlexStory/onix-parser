@@ -57,11 +57,21 @@ pub fn replace_tag(file: String, old_tag: &str, new_tag: &str) -> String {
 
 /// Returns a tuple of (shorthand, reference-name) for every row in the local csv file.
 fn get_tags(location: String) -> Vec<(String, String)> {
-    let mut res = Vec::new();
     let contents = get_file_contents(location);
-    for row in contents.trim().lines() {
-        let items: Vec<&str> = row.split(",").collect();
-        res.push((String::from(items[0]), String::from(items[1])));
-    }
+
+    let res: Vec<(String, String)> = contents
+        .trim()
+        .lines()
+        .map(split_commas)
+        .map(get_tag_tuples)
+        .collect();
     res
+}
+
+fn split_commas(source: &str) -> Vec<&str> {
+    source.split(",").collect()
+}
+
+fn get_tag_tuples(list: Vec<&str>) -> (String, String) {
+    (list[0].to_owned(), list[1].to_owned())
 }
