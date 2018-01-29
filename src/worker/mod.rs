@@ -1,3 +1,4 @@
+use std;
 use std::fs::File;
 use std::io::prelude::*;
 
@@ -11,7 +12,13 @@ pub fn replace_tags(mut file: String) -> String {
 
 /// Takes a path(filename) and returns the string contents of the file.
 pub fn get_file_contents(filename: String) -> String {
-    let mut file = File::open(filename).expect("File not found");
+    let mut file = match File::open(filename) {
+        Ok(f) => f,
+        Err(_) => {
+            eprintln!("Could not find target file.");
+            std::process::exit(3);
+        }
+    };
     let mut contents = String::new();
 
     file.read_to_string(&mut contents).expect(
@@ -33,17 +40,17 @@ pub fn write_file(contents: String, destination: String) -> File {
 }
 
 /// Replace all instances in the file , of old_tag withe a new_tag.
-pub fn replace_tag(mut file: String, old_tag: &str, new_tag: &str) -> String {
+pub fn replace_tag(file: String, old_tag: &str, new_tag: &str) -> String {
     let old = format!("<{}>", old_tag);
     let close_old = format!("</{}>", old_tag);
     let new = format!("<{}>", new_tag);
     let close_new = format!("</{}>", new_tag);
     let solo_old = format!("<{} />", old_tag);
     let solo_new = format!("<{} />", new_tag);
-    file = file.replace(&old, &new);
-    file = file.replace(&close_old, &close_new);
-    file = file.replace(&solo_old, &solo_new);
-    file
+
+    file.replace(&old, &new)
+        .replace(&close_old, &close_new)
+        .replace(&solo_old, &solo_new)
 }
 
 
