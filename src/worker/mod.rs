@@ -1,13 +1,11 @@
 use std::fs::File;
 use std::io::prelude::*;
 
-pub fn replace_tags(file: String) -> String {
-    let mut new_file = file;
-
-    for tag in get_tags() {
-        new_file = replace_tag(&new_file, &tag[0], &tag[1]);
+pub fn replace_tags(mut file: String) -> String {
+    for (old, new) in get_tags() {
+        file = replace_tag(&file, &old, &new);
     }
-    new_file
+    file
 }
 
 pub fn get_file_contents(filename: &String) -> String {
@@ -40,17 +38,12 @@ fn replace_tag(z: &str, x: &str, y: &str) -> String {
     t
 }
 
-fn get_tags() -> Vec<Vec<String>> {
+fn get_tags() -> Vec<(String, String)> {
     let mut res = Vec::new();
     let contents = get_file_contents(&String::from("include/tags.csv"));
     for row in contents.trim().split("\n") {
-        let mut t_row = Vec::new();
-        if row != "" {
-            for item in row.split(",") {
-                t_row.push(String::from(item));
-            }
-        }
-        res.push(t_row);
+        let items: Vec<&str> = row.split(",").collect();
+        res.push((String::from(items[0]), String::from(items[1])));
     }
     res
 }
