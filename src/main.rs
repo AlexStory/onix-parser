@@ -1,4 +1,4 @@
-extern crate xml;
+extern crate xml_tag_parser as xml;
 extern crate time;
 
 use time::PreciseTime;

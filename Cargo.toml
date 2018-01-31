@@ -1,6 +1,6 @@
 [package]
 authors = ["Alex Story <astory11@yahoo.com>"]
-name = "xml"
+name = "xml-tag-parser"
 version = "0.1.0"
 
 [dependencies]
